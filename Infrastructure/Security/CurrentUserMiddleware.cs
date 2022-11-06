@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Contracts.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Security;
 

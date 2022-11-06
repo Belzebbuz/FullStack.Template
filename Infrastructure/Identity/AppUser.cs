@@ -1,25 +1,45 @@
-﻿using Domain.Base;
+﻿using App.Shared.Wrapper;
+using Domain.Base;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity;
 
-public class AppUser : IdentityUser, IAggregateRoot
+public class AppUser : IdentityUser
 {
 	public string FirstName { get; set; }
 	public string? LastName { get; set; }
 	public bool IsActive { get; set; }
-	public static AppUser Create(string userName, string eMail, string firstName, string lastName = null)
+	public string? ImageUrl { get; set; }
+	public string? RefreshToken { get; set; }
+	public DateTime RefreshTokenExpiryTime { get; set; }
+	private AppUser()
 	{
-		if(userName == null) throw new ArgumentNullException(nameof(userName));
-		if(eMail == null) throw new ArgumentNullException(nameof(eMail));
-		if(firstName == null) throw new ArgumentNullException(nameof(firstName));
+	}
+
+	public static AppUser Create(string email, string? userName, string firstName, string? lastName, string? phoneNumber)
+	{
+		if (email == null) throw new ArgumentNullException(nameof(email));
+		if (firstName == null) throw new ArgumentNullException(nameof(firstName));
 		return new()
 		{
-			UserName = userName,
-			Email = eMail,
+			Email = email,
 			FirstName = firstName,
 			LastName = lastName,
+			PhoneNumber = phoneNumber,
+			UserName = userName ?? email,
 			IsActive = true
 		};
+	}
+
+	public IResult SetImageUrl(string imageUrl)
+	{
+		ImageUrl = imageUrl;
+		return Result.Success();
+	}
+
+	public IResult ToogleUserStatus(bool isActive)
+	{
+		IsActive = isActive;
+		return Result.Success();
 	}
 }

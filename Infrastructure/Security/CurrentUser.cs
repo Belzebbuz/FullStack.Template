@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using Application.Contracts.Identity;
+using System.Security.Claims;
 
 namespace Infrastructure.Security;
 
@@ -50,26 +51,4 @@ public class CurrentUser : ICurrentUser, ICurrentUserInitializer
 			_userId = Guid.Parse(userId);
 		}
 	}
-}
-
-public interface ICurrentUser
-{
-	string? Name { get; }
-
-	Guid GetUserId();
-
-	string? GetUserEmail();
-
-	bool IsAuthenticated();
-
-	bool IsInRole(string role);
-
-	IEnumerable<Claim>? GetUserClaims();
-}
-
-public interface ICurrentUserInitializer
-{
-	void SetCurrentUser(ClaimsPrincipal user);
-
-	void SetCurrentUserId(string userId);
 }

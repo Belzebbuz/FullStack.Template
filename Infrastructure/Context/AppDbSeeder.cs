@@ -30,7 +30,7 @@ public class AppDbSeeder
 
 	public async Task SeedDataAsync()
 	{
-		foreach (var role in UserRoles.DefaultRoles)
+		foreach (var role in SHRoles.DefaultRoles)
 		{
 			if(await _roleManager.Roles.SingleOrDefaultAsync(x => x.Name == role) == null)
 			{
@@ -44,19 +44,10 @@ public class AppDbSeeder
 
 		if(await _userManager.Users.SingleOrDefaultAsync(x => x.Email == _securitySettings.RootUserEmail) == null)
 		{
-			var adminUser = new AppUser()
-			{
-				Email = _securitySettings.RootUserEmail,
-				FirstName = UserRoles.Admin,
-				UserName = UserRoles.Admin,
-				EmailConfirmed = true,
-				NormalizedEmail = _securitySettings.RootUserEmail.ToUpperInvariant(),
-				NormalizedUserName = UserRoles.Admin.ToUpperInvariant(),
-				IsActive = true
-			};
+			var adminUser = AppUser.Create(_securitySettings.RootUserEmail, SHRoles.Admin, SHRoles.Admin, null, null);
 			var passwordHash = new PasswordHasher<AppUser>().HashPassword(adminUser, _securitySettings.DefaultPassword);
 			await _userManager.CreateAsync(adminUser);
-			await _userManager.AddToRoleAsync(adminUser, UserRoles.Admin);
+			await _userManager.AddToRoleAsync(adminUser, SHRoles.Admin);
 			_logger.LogInformation($"Root user {adminUser.Email} created");
 		}
 	}

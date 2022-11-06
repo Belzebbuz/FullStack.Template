@@ -1,0 +1,20 @@
+{
+	"auth.failed": "Пользователь не найден.",
+	"caching.added": "Cache Added : {0}",
+	"caching.refreshed": "Cache Refreshed : {0}",
+	"identity.usernotfound": "Пользователь не найден.",
+	"identity.usernotactive": "Пользователь не активен. Обратитесь к администратору",
+	"identity.emailnotconfirmed": "E-Mail не подтвержден.",
+	"identity.invalidcredentials": "Неверный email или пароль.",
+	"identity.invalidtoken": "Неверный токен.",
+	"identity.invalidrefreshtoken": "Invalid Refresh Token.",
+	"identity.failtoggleadmin": "Невозможно заблокировать пользователя с ролью администратор",
+	"identity.failrootuserdisableadmin": "Нельзя убрать роль администратора у главного пользователя",
+	"entity.notfound": "{0} {1} Not Found.",
+	"product.alreadyexists": "Product {0} already Exists.",
+	"product.notfound": "Product {0} Not Found.",
+	"brand.notfound": "Brand {0} Not Found.",
+	"brand.cannotbedeleted": "Brand cannot be deleted as it's being used.",
+	"brand.alreadyexists": "Brand {0} already Exists.",
+	"exceptionmiddleware.supportmessage": "Provide the ErrorId to the support team for further analysis."
+}

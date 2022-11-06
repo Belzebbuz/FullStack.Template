@@ -27,8 +27,16 @@ public static class Startup
 	}
 	private static IServiceCollection AddRepositories(this IServiceCollection services)
 	{
-		services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
-		services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+		services.AddScoped(typeof(IRepository<>), typeof(AppDbRepository<>));
+
+		foreach (var aggregateRootType in
+				 typeof(IAggregateRoot).Assembly.GetExportedTypes()
+					 .Where(t => typeof(IAggregateRoot).IsAssignableFrom(t) && t.IsClass)
+					 .ToList())
+		{
+			services.AddScoped(typeof(IReadRepository<>).MakeGenericType(aggregateRootType), sp =>
+				sp.GetRequiredService(typeof(IRepository<>).MakeGenericType(aggregateRootType)));
+		}
 		return services;
 	}
 

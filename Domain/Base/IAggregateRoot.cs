@@ -1,5 +1,5 @@
 ﻿namespace Domain.Base;
 
-public interface IAggregateRoot
+public interface IAggregateRoot : IEntity
 {
 }

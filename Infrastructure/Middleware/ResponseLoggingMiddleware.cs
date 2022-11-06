@@ -1,4 +1,4 @@
-using Infrastructure.Security;
+using Application.Contracts.Identity;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 using Serilog.Context;

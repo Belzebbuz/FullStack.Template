@@ -1,6 +1,8 @@
-﻿using Infrastructure.Common;
+﻿using Infrastructure.Caching;
+using Infrastructure.Common;
 using Infrastructure.Context;
 using Infrastructure.Identity;
+using Infrastructure.Localization;
 using Infrastructure.Middleware;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
@@ -16,10 +18,12 @@ public static class Startup
 	{
 		return services
 			.AddPersistance(config)
+			.AddCaching(config)
 			.AddAuth(config)
 			.AddDbIdentity()
 			.AddRequestLogging(config)
 			.AddExceptionMiddleware()
+			.AddLocalization(config)
 			.AddServices()
 			.AddCors(opt => opt.AddPolicy("CorsPolicy", policy => policy.AllowAnyHeader()
 																.AllowAnyMethod()
@@ -29,6 +33,7 @@ public static class Startup
 	public static async Task UseInfrastructure(this IApplicationBuilder app, IConfiguration config)
 	{
 		await app.InitDatabaseAsync<ApplicationDbContext>();
+		app.UseLocalization(config);
 		app.UseExceptionMiddleware();
 		app.UseRouting();
 		app.UseCors("CorsPolicy");
