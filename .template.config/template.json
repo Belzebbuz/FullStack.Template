@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Vladislav Shkurgan",
+    "classifications": ["Web","ASP.NET Core","Web API"],
+    "identity": "shk.FullStack.Template",
+    "name": "Template of fullstack application",
+    "shortName":"shkfullstacktemplate",
+    "description": "template of fullstack application",
+    "sourceName": "shk.FullStack.Template",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "preferNameDirectory": true
+}
